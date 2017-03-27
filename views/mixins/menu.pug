@@ -1,0 +1,19 @@
+mixin menu(activeLinkNumber)
+   div(class='navbar navbar-default navbar-fixed-top')
+       div(class='container')
+         div(class='navbar-header')
+           button(type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse')
+             span(class='icon-bar')
+             span(class='icon-bar')
+             span(class='icon-bar')
+           a(class='navbar-brand' href="#") Project name
+         div(class='navbar-collapse collapse')
+             ul(class='nav navbar-nav')
+                - var menu = {'Home':'link1', 'About': 'link2', 'Contact': 'link3'}
+                - var i=0
+                  each linkPath, linkName in menu
+                    if i==activeLinkNumber
+                       li(class='active'): a(href=linkPath) #{linkName}
+                    else
+                        li: a(href=linkPath) #{linkName}
+                    - i++
