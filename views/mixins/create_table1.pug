@@ -15,8 +15,9 @@ mixin createTable(headers, data)
        each box in day.box
          each client in box.clients
            tr
-             th box.boxName
-             td чек
+             th #{box.boxName}
+             td
+               input(type="checkbox")
              td #{client.carInfo.carModel} [#{client.carInfo.licensePlate}]
              td #{client.mechanic.FIO}
              td 08:00
@@ -25,16 +26,21 @@ mixin createTable(headers, data)
              - var lastElement =  columnShift
              - var emptyCellsQuantity = 0
              - var taskLength = 1
-             - console.log("Box name:" + box.boxName + "client.works: " + client.works)
+
              each work in client.works
                   - //each task, index in work.cells
-                  - console.log("Work cells: " + work.cells)
+                  - console.log("Work: " + work)
+                  - console.log("workname: " + work.workName)
+                  - console.log("workID: " + work.workID)
+                  - console.log("cells: " + work.cells)
+
+
                     - emptyCellsQuantity = columnShift + work.cells[0] - lastElement - 1
                     - for (var i = 0; i < emptyCellsQuantity; i++)
                        td
                     - taskLength = work.cells.length
                       td(colspan = taskLength) #{work.workName}
-                    - lastElement = work.cells[taskLength-1] + columnShift
+                    - lastElement = work.cells[taskLength-1]
                   if lastElement < 22
                     - for (var z = 0; z < 22-lastElement; z++)
                       td

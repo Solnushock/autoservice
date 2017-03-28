@@ -20,6 +20,7 @@ var schema = new Schema({
                     },
                     "works": [{
                             "workID": Schema.ObjectId,
+                            "cells" : [],
                             "startTime": Date,
                             "endTime": Date,
                             "workName": String

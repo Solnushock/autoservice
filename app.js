@@ -14,6 +14,3 @@ require('./routes')(app);
 app.listen(3000,'localhost', function(){
     console.log('Express server listening on port 3000');
 });
-/*
-var str = "ddd";
-str.*/
