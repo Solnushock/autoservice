@@ -2,23 +2,41 @@ mixin createTable(headers, data)
  table
    thead
      tr
+       - var lastElement = 0
        each header in headers
-        th(class='vertical'): span: span #{header}
+         - lastElement++
+         if lastElement == headers.length
+           th: span: span #{header}
+         else
+           th(class='vertical'): span: span #{header}
    tbody
-      each row in data
-         tr
-           - var lastElement =  0
-           - var emptyCellsQuantity = 0
-           - var taskLength = 1
-           each task, index in row.cells
-             - emptyCellsQuantity = task.columns[0] - lastElement - 1
-             - for (var i = 0; i < emptyCellsQuantity; i++)
-                td
-             - taskLength = task.columns.length
-               td(colspan = taskLength) #{task.name}
-             - lastElement = task.columns[taskLength-1]
-           if lastElement < 5
-             - for (var z = 0; z < 5-lastElement; z++)
-               td
-           - lastElement = 0
+     each day in data
+       each box in day.box
+         each client in box.clients
+           tr
+             th #{box.boxName}
+             td
+               input(type="checkbox")
+             td #{client.carInfo.carModel} [#{client.carInfo.licensePlate}]
+             td #{client.mechanic.FIO}
+             td 08:00
+             td 15:00
+             td 07:00
+             - var lastElement =  0
+             - var emptyCellsQuantity = 0
+             - var taskLength = 1
+
+             each work in client.works
+                - emptyCellsQuantity = work.startCell - lastElement - 1
+                - for (var i = 0; i < emptyCellsQuantity; i++)
+                     td
+                - taskLength = work.endCell - work.startCell + 1
+                  td(colspan = taskLength) #{work.workName}
+                - lastElement = work.endCell
+             if lastElement < 24
+               - for (var z = 0; z < 24-lastElement; z++)
+                    td
+             td #{client.carInfo.comments}
+
+
 
