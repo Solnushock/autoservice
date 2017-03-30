@@ -1,6 +1,7 @@
 const pug = require('pug');
 var express = require('express');
 var path = require('path');
+var config = require('./config');
 
 var app = express();
 
@@ -11,6 +12,6 @@ app.set('view engine', 'pug');
 //app.use('/', require('./middleware/loadDataTable'));
 require('./routes')(app);
 
-app.listen(3000,'localhost', function(){
-    console.log('Express server listening on port 3000');
+app.listen(config.get('port'),'localhost', function(){
+    console.log('Express server listening on port ' + config.get('port'));
 });
