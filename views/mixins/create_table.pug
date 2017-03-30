@@ -31,7 +31,7 @@ mixin createTable(headers, data)
                 - for (var i = 0; i < emptyCellsQuantity; i++)
                      td
                 - taskLength = work.endCell - work.startCell + 1
-                  td(colspan = taskLength) #{work.workName}
+                  td(colspan = taskLength class="task") #{taskLength*0.5}
                 - lastElement = work.endCell
              if lastElement < 24
                - for (var z = 0; z < 24-lastElement; z++)
